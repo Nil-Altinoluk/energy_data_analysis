@@ -1,0 +1,10 @@
+import pandas as pd
+retail=pd.read_csv("online_retail.csv")
+retail.sort_values(by="Quantity").head()
+qa=retail["Quantity"]
+up=retail["UnitPrice"]
+total=qa.mul(up).sum()
+find_best_customer=retail.groupby("CustomerID")
+favor=retail.value_counts("CustomerID")
+price_1=favor[favor<1000]
+price_2=favor[favor>1000]
