@@ -1,0 +1,65 @@
+import matplotlib.pyplot as plt
+import pandas as pd 
+from datetime import datetime
+energy=pd.read_csv("Energy_production.csv",parse_dates=["Date"],dayfirst=True,index_col="Date")
+for_region=energy.groupby("Region")
+energy.fillna(method="ffill")
+thermal_generation_actual=for_region["Thermal Generation Actual (in MU)"].sum()
+thermal_generation_estimated=for_region["Thermal Generation Estimated (in MU)"].sum()
+nuclear_generation_actual=for_region["Nuclear Generation Actual (in MU)"].sum()
+nuclear_generation_estimated=for_region["Nuclear Generation Actual (in MU)"].sum()
+hydro_generation_actual=for_region["Hydro Generation Actual (in MU)"].sum()
+hydro_generation_estimated=for_region["Hydro Generation Estimated (in MU)"].sum()
+
+special=energy.describe()
+print(special)
+
+
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+fig=plt.plot(special,"ko--",color="r")
+plt.style.use("seaborn-whitegrid")
+
+
+
+#we will make graph with this values with regions
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+thermal_generation_actual.plot.hist(color="red",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+nuclear_generation_actual.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+nuclear_generation_estimated.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+hydro_generation_actual.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+hydro_generation_estimated.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+nuclear_generation_actual.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
+
+
+
+
+%matplotlib inline
+plt.style.use("fivethirtyeight")
+thermal_generation_estimated.plot.hist(color="blue",alpha=1,bins=20)
+plt.style.use("seaborn-whitegrid")
