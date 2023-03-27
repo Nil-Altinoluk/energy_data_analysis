@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns;sns.set()
+%matplotlib inline
+
+from sklearn.datasets import make_blobs
+
+X,y=make_blobs(100,2,centers=2,cluster_std=1.5)
+#we take 100 variables, two center for sets,1.5 cluster deviation for sets
+    
+plt.scatter(X[:,0],X[:,1],c=y,s=20,cmap="Spectral")   
+#we take examples in X, we define point size as s, we define colors with cmap
+
+
+# we make models with make_blobs dataset, we can make a model with using avareges of points and  standard deviation by Gaussian 
+
+from sklearn.naive_bayes import GaussianNB 
+model=GaussianNB()
+
+model.fit(X,y)
+
+# we fit the model
+
+#lets make random datas for testing
+
+rng=np.random.RandomState(0)
+X_new=[-4,-12]+[13,16]*rng.rand(100,2)
+
+#lets make guess with our new data
+
+y_new=model.predict(X_new)
+
+#lets see where the new datas in our graph and compare it with old ones
+
+plt.scatter(X_new[:,0],X_new[:,1],c=y_new,s=20,cmap="cool",alpha=0.3)
